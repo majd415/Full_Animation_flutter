@@ -46,7 +46,21 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
+
+  //SingleTickerProviderStateMixin
+
+  late AnimationController animationController;
+@override
+  void initState() {
+  animationController=AnimationController(vsync: this,duration: Duration(seconds: 2),lowerBound:100,upperBound: 300 );
+    super.initState();
+  }
+  //end SingleTickerProviderStateMixin
+
+
+
+
   int _counter = 0;
   double w=100;
   double h=200;
@@ -239,6 +253,50 @@ h=300;
               duration: Duration(seconds: 2),
             ),
           ),
+          SizedBox(height: 10,),
+TweenAnimationBuilder(
+  // colortween(begin:colors.red,end:colors.blue)
+
+  //if we want dont work during first start page put begin and and in same value
+    tween: Tween(begin:100.0 ,end:300.0 ),
+    duration: Duration(seconds: 2),
+    builder: (context,value,child){
+      return Container(
+        alignment: Alignment.center,
+        width: value,
+        height: value,
+        color: Colors.greenAccent,
+        child: Text("TweenAnimationBuilder"),
+
+      );
+    }),
+          SizedBox(height: 10,),
+          InkWell(
+            onTap: (){
+
+              animationController.forward();
+              //animationController
+              // animationController.reverse();
+              //stop
+              //repeat
+              //reset
+            },
+            child: AnimatedBuilder(
+              //child : if we don't need implicate animation on wedgit we put it in child
+              child: Text("Text "),
+                animation:animationController ,
+                builder: (context,child){
+                  return Container(
+                    width:animationController.value ,
+                    height:animationController.value ,
+                    color: Colors.red,
+                    child: Text(" Explicit Animations",
+                    style: TextStyle(fontSize: animationController.value/10),),
+                  );
+                }),
+          )
+// TweenAnimationBuilder(tween: tween, duration: duration, builder: builder)
+
 
 
         ],
