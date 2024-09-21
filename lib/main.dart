@@ -50,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
 
   //SingleTickerProviderStateMixin
 
-  late AnimationController animationController;
+  // late AnimationController animationController;
   late AnimationController controller;
   late Animation<AlignmentGeometry> alignController;
   late Animation<double> rotateController;
@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
 
   @override
   void initState() {
-  animationController=AnimationController(vsync: this,duration: Duration(seconds: 2),lowerBound:100,upperBound: 300 );
+  // animationController=AnimationController(vsync: this,duration: Duration(seconds: 2),lowerBound:100,upperBound: 300 );
   controller=AnimationController(vsync: this,duration: Duration(seconds: 2),)..repeat(reverse: true);
 alignController=Tween<AlignmentGeometry>(
 begin: Alignment.centerLeft,
@@ -286,30 +286,30 @@ TweenAnimationBuilder(
       );
     }),
           SizedBox(height: 10,),
-          InkWell(
-            onTap: (){
-
-              animationController.forward();
-              //animationController
-              // animationController.reverse();
-              //stop
-              //repeat
-              //reset
-            },
-            child: AnimatedBuilder(
-              //child : if we don't need implicate animation on wedgit we put it in child
-              child: Text("Text "),
-                animation:animationController ,
-                builder: (context,child){
-                  return Container(
-                    width:animationController.value ,
-                    height:animationController.value ,
-                    color: Colors.red,
-                    child: Text(" Explicit Animations",
-                    style: TextStyle(fontSize: animationController.value/10),),
-                  );
-                }),
-          ),
+          // InkWell(
+          //   onTap: (){
+          //
+          //     // animationController.forward();
+          //     //animationController
+          //     // animationController.reverse();
+          //     //stop
+          //     //repeat
+          //     //reset
+          //   },
+          //   child: AnimatedBuilder(
+          //     //child : if we don't need implicate animation on wedgit we put it in child
+          //     child: Text("Text "),
+          //       animation:animationController ,
+          //       builder: (context,child){
+          //         return Container(
+          //           width:animationController.value ,
+          //           height:animationController.value ,
+          //           color: Colors.red,
+          //           child: Text(" Explicit Animations",
+          //           style: TextStyle(fontSize: animationController.value/10),),
+          //         );
+          //       }),
+          // ),
 // TweenAnimationBuilder(tween: tween, duration: duration, builder: builder)
           SizedBox(height: 10,),
 
