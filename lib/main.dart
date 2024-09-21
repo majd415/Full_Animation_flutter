@@ -51,10 +51,25 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
   //SingleTickerProviderStateMixin
 
   late AnimationController animationController;
-@override
+  late AnimationController controller;
+  late Animation<AlignmentGeometry> alignController;
+  late Animation<double> rotateController;
+
+
+  @override
   void initState() {
   animationController=AnimationController(vsync: this,duration: Duration(seconds: 2),lowerBound:100,upperBound: 300 );
-    super.initState();
+  controller=AnimationController(vsync: this,duration: Duration(seconds: 2),)..repeat(reverse: true);
+alignController=Tween<AlignmentGeometry>(
+begin: Alignment.centerLeft,
+  end: Alignment.centerRight
+).animate(controller);
+  rotateController=Tween<double>(
+begin: 0,
+    end: 2
+  ).animate(controller);
+
+  super.initState();
   }
   //end SingleTickerProviderStateMixin
 
@@ -294,10 +309,42 @@ TweenAnimationBuilder(
                     style: TextStyle(fontSize: animationController.value/10),),
                   );
                 }),
-          )
+          ),
 // TweenAnimationBuilder(tween: tween, duration: duration, builder: builder)
+          SizedBox(height: 10,),
+
+TweenAnimationBuilder(
+    tween: Tween(begin: 0.0,end: 2*3.14),
+    duration: Duration(seconds: 3),
+    builder: (context,value,child){
+      return Transform.rotate(
+        angle:value,
+        child:  Container(
+          width: 200,
+          height: 200,
+          color: Colors.redAccent,
+          child: Text("Rotate "),
+
+        ),);
+
+    }),
+          // Transform.translate(offset: offset)
+          // Transform.scale()
+          SizedBox(height: 10,),
 
 
+          AlignTransition(alignment: alignController,
+
+              child: RotationTransition(
+                turns: rotateController,
+                child: Container(
+                  width: 200,
+                  height: 200,
+                  color: Colors.lightGreenAccent,
+                  child: Text("Rotate "),
+
+                ),
+              ) )
 
         ],
       ),
